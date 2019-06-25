@@ -1,2 +1,24 @@
-# Linux-Usage-Agent
-# Linux-Usage-Agent
+##Introduction
+The project builds a cluster monitor to help us monitoring the cluster resources internal.It help us to know more about hows the cpu works,how many space we still have and lots of other details.
+
+
+##Architechture and design
+![alt text](/Users/keshang_xpk/desktop/project-architecture.png "Cluster diagram ")
+Create a database named"host_agent"and use its default schema "public"
+psql----host_agent
+schema---default public
+table----create table(host_info,host_usage)
+We use this two tabels to storage all the information.
+Using Scripts to collect data from system and get connection
+Using crontab  to trigger host_usage.sh every minute
+
+##Usage
+create a database(host_agent) in docker container and create two tables (host_info and host_usage) in it.
+host_info has id,hostname,cpu_number,cpu_architecture,cpu_model_cpu_mhz,L2-cache,timestamp
+host_usage has "timestamp,host_id,memory_free,cpu_idel,cpu_kernel,disk_io,disk_available
+crontab allow us to set up the frequency you want the scripts to excute.
+
+#Improvements
+1)handle hardware update
+2)easier to extend the program later
+3)reduce heigh latency
