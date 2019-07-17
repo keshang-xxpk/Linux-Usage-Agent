@@ -1,5 +1,5 @@
 # Introduction
-The project builds a cluster monitor to help us monitoring the cluster resources internal.It help us to know more about hows the cpu works,how many space we still have and lots of other details.
+-The project builds a cluster monitor to help us monitoring the cluster resources internal.It help us to know more about hows the cpu works,how many space we still have and lots of other details.
 
 
 # Architechture and design
@@ -16,7 +16,7 @@ Using crontab  to trigger host_usage.sh every minute
 - create a database(host_agent) in docker container and create two tables **host_info** and **host_usage** in it.
 - **host_info** has <pre>id,hostname,cpu_number,cpu_architecture,cpu_model_cpu_mhz,L2-cache,timestamp</pre>
 - **host_usage** has <pre>"timestamp,host_id,memory_free,cpu_idel,cpu_kernel,disk_io,disk_available</pre>
-crontab allow us to set up the frequency you want the scripts to excute.
+- crontab allow us to set up the frequency you want the scripts to excute.
 
 # Improvements
 - handle hardware update
