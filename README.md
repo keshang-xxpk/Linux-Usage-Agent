@@ -19,6 +19,6 @@ host_usage has "timestamp,host_id,memory_free,cpu_idel,cpu_kernel,disk_io,disk_a
 crontab allow us to set up the frequency you want the scripts to excute.
 
 # Improvements
-1)handle hardware update
-2)easier to extend the program later
-3)reduce heigh latency
+- handle hardware update
+- easier to extend the program later
+- reduce heigh latency
