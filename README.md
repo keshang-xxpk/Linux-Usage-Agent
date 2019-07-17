@@ -13,9 +13,9 @@ Using Scripts to collect data from system and get connection
 Using crontab  to trigger host_usage.sh every minute
 
 # Usage
--create a database(host_agent) in docker container and create two tables **host_info** and **host_usage** in it.
-**host_info** has <pre>id,hostname,cpu_number,cpu_architecture,cpu_model_cpu_mhz,L2-cache,timestamp</pre>
-host_usage has "timestamp,host_id,memory_free,cpu_idel,cpu_kernel,disk_io,disk_available
+- create a database(host_agent) in docker container and create two tables **host_info** and **host_usage** in it.
+- **host_info** has <pre>id,hostname,cpu_number,cpu_architecture,cpu_model_cpu_mhz,L2-cache,timestamp</pre>
+- **host_usage** has "timestamp,host_id,memory_free,cpu_idel,cpu_kernel,disk_io,disk_available
 crontab allow us to set up the frequency you want the scripts to excute.
 
 # Improvements
