@@ -1,5 +1,5 @@
 # Introduction
--The project builds a cluster monitor to help us monitoring the cluster resources internal.It help us to know more about hows the cpu works,how many space we still have and lots of other details.
+### The project builds a cluster monitor to help us monitoring the cluster resources internal.It help us to know more about hows the cpu works,how many space we still have and lots of other details.
 
 
 # Architechture and design
