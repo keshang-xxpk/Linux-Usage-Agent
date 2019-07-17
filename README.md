@@ -3,14 +3,14 @@
 
 
 # Architechture and design
-https://github.com/keshang-xxpk/Linux-Usage-Agent/blob/master/project-architecture.png   “Project architecture"
-Create a database named"host_agent"and use its default schema "public"
-psql----host_agent
-schema---default public
-table----create table(host_info,host_usage)
-We use this two tabels to storage all the information.
-Using Scripts to collect data from system and get connection
-Using crontab  to trigger host_usage.sh every minute
+- https://github.com/keshang-xxpk/Linux-Usage-Agent/blob/master/project-architecture.png   “Project architecture"
+- Create a database named"host_agent"and use its default schema "public"
+- psql----host_agent
+- schema---default public
+- table----create table<pre>host_info,host_usage</pre>
+- Using two tabels to storage all the information.
+- Using Scripts to collect data from system and get connection
+- Using crontab  to trigger host_usage.sh every minute
 
 # Usage
 - create a database(host_agent) in docker container and create two tables **host_info** and **host_usage** in it.
