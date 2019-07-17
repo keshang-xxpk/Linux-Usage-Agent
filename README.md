@@ -3,7 +3,7 @@
 
 
 # Architechture and design
-![alt text](/Users/keshang_xpk/desktop/project-architecture.png "Cluster diagram ")
+https://github.com/keshang-xxpk/Linux-Usage-Agent/blob/master/project-architecture.png   “Project architecture"
 Create a database named"host_agent"and use its default schema "public"
 psql----host_agent
 schema---default public
