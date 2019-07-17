@@ -1,27 +1,58 @@
-
 psql_host=$1
-port_host=$2
+psql_port=$2
 db_name=$3
-user_name=$4
-password=$5
+psql_user=$4
+psql_password=$5
+export PGPASSWORD=$psql_password
 
-timestamp=$(date "+%Y-%m-%d %H:%M:%S")
-memory_free=$(cat /proc/meminfo|egrep MemFree | awk '{print $2}')
-cpu_idel=$(vmstat -t | tail -n 1 | awk '{print $11}')
-cpu_kernel=$(vmstat -t | tail -n 1 | awk '{print $7}')
-disk_io=$(vmstat -d | tail -n 1 | awk '{print $10}')
-disk_avaliable=$(df -BM / | tail -n 1 |awk '{print $4}' | sed "s/[^0-9]//g"
+vmstat=$(vmstat -t --unit M | tail -1)
+vmstatD=$(vmstat -d | tail -1)
+
+function getTimestamp {
+        ts=$(echo $vmstat | awk '{print $18, $19}')
+}
+
+function getVmstatHelper {
+	pattern=$1
+	value=$(echo $vmstat | awk '{print '$pattern'}')
+	echo $value
+}
+
+function getHostId {
+	host_id=$(cat /home/centos/dev/jrvs/bootcamp/host_agent/scripts/host_id.txt)
+}
+
+function getMemFree {
+	memFree=$(echo $vmstat | awk '{print $4}')
+}
+
+function getCpuIdel {
+	cpuIdel=$(echo $vmstat | awk '{print $15}') 
+}
+
+function getCpuKernel {
+	cpuKernel=$(echo $vmstat | awk '{print $14}')
+}
+
+function getDiskIO {
+	diskIO=$(echo $vmstatD | awk '{print $10}')
+}
+
+function getDiskAvailable {
+	diskAvailable=$(df -BM | egrep '/$' | awk '{print $4}' | sed 's/M//')
+}
+getTimestamp
+getHostId
+getMemFree
+getCpuIdel
+getCpuKernel
+getDiskIO
+getDiskAvailable
+
+insert=$(cat <<-END
+INSERT INTO PUBLIC.host_usage ("timestamp", host_id, memory_free, cpu_idel, cpu_kernel, disk_io, disk_available) 
+VALUES ('$ts', $host_id, $memFree, $cpuIdel, $cpuKernel, $diskIO, $diskAvailable);
+END
 )
-hostname=`hostname -f`
 
-host_id=$(cat ~/host_id | xargs)
-
-#Step2:construct INSERT statement
-insert_stmt=$(cat <<-END
-	INSERT INTO host_usage("timestamp",host_id,memory_free,cpu_idel,cpu_kernel,disk_io,disk_avaliable) VALUES('${timestamp}','${host_id}',${memory_free},${cpu_idel},${cpu_kernel},${disk_io},${disk_avaliable};
-END)
-echo $insert_stmt
-
-export PGPASSWORD=$password
-psql -h $psql_host -p $port_host -U $user_name -d $db_name -c "$insert_stmt"
-
+psql -h $psql_host -U $psql_user $db_name -c "$insert"
