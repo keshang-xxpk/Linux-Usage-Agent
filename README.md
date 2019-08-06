@@ -3,7 +3,7 @@
 
 
 # Architechture and design
-- ![image](http://github.com/itmyhome2013/readme_add_pic/raw/master/images/nongshalie.jpg)
+- ![image](https://github.com/keshang-xxpk/Linux-Usage-Agent/blob/master/project-architecture.png)
 
 
 - Create a database named"host_agent"and use its default schema "public"
